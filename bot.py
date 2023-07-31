@@ -1,4 +1,4 @@
-from config.token import BOT_TOKEN
+from config.token import BOT_TOKEN, STOP_LIST
 # import json
 
 from aiogram import Bot, Dispatcher
@@ -27,6 +27,12 @@ async def process_help_command(message: Message):
 @dp.message()
 async def send_echo(message: Message):
     try:
+        for word in message.text.split():
+            if word.lower() in STOP_LIST:
+                await message.reply(text=f"Мат запрещён правилами чата!\n"
+                                         f"Репутация пользователя @{message.from_user.username} понижена!")
+                await message.delete()
+                return
         await bot(message.send_copy(chat_id=message.chat.id))
     except Exception as e:
         print(*message, sep="\n")
