@@ -1,0 +1,9 @@
+# Virtual environment
+venv/
+
+# IDE's garbage
+.vscode/
+*pycache*
+
+# Private info about bot
+config.py
