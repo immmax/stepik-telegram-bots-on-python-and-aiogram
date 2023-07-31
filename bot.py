@@ -27,6 +27,18 @@ async def send_photo_echo(message: Message):
     await message.reply_photo(message.photo[0].file_id)
 
 
+# voice handler
+async def send_voice_echo(message: Message):
+    # print(*message, sep="\n")
+    await message.reply_voice(message.voice.file_id)
+
+
+# sticker handler
+async def send_sticker_echo(message: Message):
+    # print(*message, sep="\n")
+    await message.reply_voice(message.sticker.file_id)
+
+
 # other commands handler
 async def send_echo(message: Message):
     try:
@@ -39,6 +51,8 @@ async def send_echo(message: Message):
 dp.message.register(process_start_command, Command(commands=["start"]))
 dp.message.register(process_help_command, Command(commands=["help"]))
 dp.message.register(send_photo_echo, F.photo)
+dp.message.register(send_voice_echo, F.voice)
+dp.message.register(send_sticker_echo, F.sticker)
 dp.message.register(send_echo)
 
 if __name__ == "__main__":
