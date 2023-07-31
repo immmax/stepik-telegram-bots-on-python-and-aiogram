@@ -7,6 +7,8 @@ from config.config import *
 offset: int = -2
 counter: int = 0
 chat_id: int
+cat_response: requests.Response
+cat_link: str
 
 while counter < MAX_COUNTER:
 
@@ -19,7 +21,12 @@ while counter < MAX_COUNTER:
         for result in updates['result']:
             offset = result['update_id']
             chat_id = result['message']['from']['id']
-            requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={TEXT}')
+            cat_response = requests.get(API_CATS_URL)
+            cat_link = cat_response.json()[0]['url']
+            if cat_response.status_code == 200:
+                requests.get(f'{API_URL}{BOT_TOKEN}/sendPhoto?chat_id={chat_id}&photo={cat_link}')
+            else:
+                requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={ERROR_TEXT}')
 
-    time.sleep(1)
+    time.sleep(20.63)
     counter += 1
