@@ -1,10 +1,10 @@
 from config.token import BOT_TOKEN
-import json
+# import json
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
-from aiogram import F
+# from aiogram import F
 
 bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
@@ -21,38 +21,17 @@ async def process_help_command(message: Message):
                          "I'll send you your message.")
 
 
-# photo handler
-async def send_photo_echo(message: Message):
-    # print(*message, sep="\n")
-    await message.reply_photo(message.photo[0].file_id)
-
-
-# voice handler
-async def send_voice_echo(message: Message):
-    # print(*message, sep="\n")
-    await message.reply_voice(message.voice.file_id)
-
-
-# sticker handler
-async def send_sticker_echo(message: Message):
-    # print(*message, sep="\n")
-    await message.reply_voice(message.sticker.file_id)
-
-
 # other commands handler
 async def send_echo(message: Message):
     try:
-        await message.reply(text=message.text)
+        await bot(message.send_copy(chat_id=message.chat.id))
     except Exception as e:
-        # print(*message, sep="\n")
-        await message.reply(text=f"Я пока не могу обрабатывать "
-                                 f"такие сообщения:\n{e}")
+        print(*message, sep="\n")
+        await message.reply(text=f"Данный тип апдейтов не поддерживается "
+                                 f"методом send_copy:\n{e}")
 
 dp.message.register(process_start_command, Command(commands=["start"]))
 dp.message.register(process_help_command, Command(commands=["help"]))
-dp.message.register(send_photo_echo, F.photo)
-dp.message.register(send_voice_echo, F.voice)
-dp.message.register(send_sticker_echo, F.sticker)
 dp.message.register(send_echo)
 
 if __name__ == "__main__":
