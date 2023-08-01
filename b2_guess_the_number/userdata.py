@@ -10,11 +10,7 @@ class User():
     wins: int
 
 
-# user: dict = {"in_game": False,
-#               "secret_number": None,
-#               "attempts": None,
-#               "total_games": 0,
-#               "wins": 0}
-
-
 users: dict = {}
+
+
+admin_ids: list[int] = [325102516]
