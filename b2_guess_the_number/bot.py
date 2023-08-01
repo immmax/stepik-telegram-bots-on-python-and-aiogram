@@ -27,9 +27,9 @@ bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
 
 
-@dp.message(IsAdmin(admin_ids))
-async def answer_if_admins_update(message: Message):
-    await message.reply(text="You're an Admin!")
+# @dp.message(IsAdmin(admin_ids))
+# async def answer_if_admins_update(message: Message):
+#     await message.reply(text="You're an Admin!")
 
 
 @dp.message(Command(commands=["start"]))
