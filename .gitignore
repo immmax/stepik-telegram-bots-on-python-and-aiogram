@@ -6,4 +6,4 @@ venv/
 *pycache*
 
 # Private info about bot
-token.py
+*token.py
