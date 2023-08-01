@@ -1,4 +1,4 @@
-from config.config import BOT_TOKEN, ATTEMPTS
+from config.token import BOT_TOKEN
 from userdata import *
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command, BaseFilter
@@ -6,6 +6,10 @@ from aiogram.types import Message
 from aiogram import F
 
 import random
+
+YES = ["да", "давай", "сыграем", "игра"]
+NO = ["нет", "не хочу", "в другой раз"]
+ATTEMPTS: int = 5
 
 class IsAdmin(BaseFilter):
     def __init__(self, admin_ids: list[int]) -> None:
