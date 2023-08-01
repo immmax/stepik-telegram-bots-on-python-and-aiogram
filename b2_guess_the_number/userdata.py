@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 @dataclass
 class User():
+    username: str
     in_game: bool
     secret_number: int | None
     attempts: int | None
