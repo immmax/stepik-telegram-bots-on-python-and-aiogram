@@ -1,4 +1,9 @@
-from config.token import BOT_TOKEN, STOP_LIST
+import os
+import dotenv
+dotenv.load_dotenv()
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ADMIN_ID = os.getenv('ADMIN_ID')
+
 # import json
 
 from aiogram import Bot, Dispatcher
@@ -8,7 +13,7 @@ from aiogram.types import Message
 
 bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
-
+STOP_LIST = ["список", "запрещённых", "слов"]
 
 # "/start" command handler
 @dp.message(Command(commands=["start"]))

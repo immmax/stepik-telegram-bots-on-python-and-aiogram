@@ -1,4 +1,9 @@
-from config.token import BOT_TOKEN
+import os
+import dotenv
+dotenv.load_dotenv()
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ADMIN_ID = os.getenv('ADMIN_ID')
+
 from userdata import *
 from aiogram import Bot, Dispatcher
 from aiogram.filters import Command, BaseFilter
@@ -12,11 +17,11 @@ NO = ["нет", "не хочу", "в другой раз"]
 ATTEMPTS: int = 5
 
 class IsAdmin(BaseFilter):
-    def __init__(self, admin_ids: list[int]) -> None:
-        self.admin_ids = admin_ids
+    def __init__(self, admin_id: str) -> None:
+        self.admin_id = int(admin_id)
 
     async def __call__(self, message: Message) -> bool:
-        return message.from_user.id in self.admin_ids
+        return message.from_user.id == self.admin_id
 
 
 ''' Функции для игры'''
@@ -31,9 +36,9 @@ bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
 
 
-# @dp.message(IsAdmin(admin_ids))
-# async def answer_if_admins_update(message: Message):
-#     await message.reply(text="You're an Admin!")
+@dp.message(IsAdmin(ADMIN_ID))
+async def answer_if_admins_update(message: Message):
+    await message.reply(text="You're an Admin!")
 
 
 @dp.message(Command(commands=["start"]))
@@ -146,10 +151,10 @@ async def process_unknown_commands(message: Message):
 
 
 if __name__ == "__main__":
+    print(">>> РАБОТАЕМ <<<")
     dp.run_polling(bot)
 
 """
 Необходимо добавить улучшения для бота из этого шага:
 >>> https://stepik.org/lesson/759400/step/6?unit=761416 <<<
 """
-num = 3

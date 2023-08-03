@@ -7,3 +7,4 @@ venv/
 
 # Private info about bot
 *token.py
+.env

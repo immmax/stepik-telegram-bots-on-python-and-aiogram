@@ -11,6 +11,3 @@ class User():
 
 
 users: dict = {}
-
-
-admin_ids: list[int] = [325102516]
