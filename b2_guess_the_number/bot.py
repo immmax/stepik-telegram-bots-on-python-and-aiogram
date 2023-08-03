@@ -1,8 +1,9 @@
-import os
-import dotenv
-dotenv.load_dotenv()
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-ADMIN_ID = os.getenv('ADMIN_ID')
+from environs import Env
+
+env = Env()
+env.read_env()
+BOT_TOKEN = env('BOT_TOKEN')
+ADMIN_ID = env.int('ADMIN_ID')
 
 from userdata import *
 from aiogram import Bot, Dispatcher
@@ -17,8 +18,8 @@ NO = ["нет", "не хочу", "в другой раз"]
 ATTEMPTS: int = 5
 
 class IsAdmin(BaseFilter):
-    def __init__(self, admin_id: str) -> None:
-        self.admin_id = int(admin_id)
+    def __init__(self, admin_id: int) -> None:
+        self.admin_id = admin_id
 
     async def __call__(self, message: Message) -> bool:
         return message.from_user.id == self.admin_id

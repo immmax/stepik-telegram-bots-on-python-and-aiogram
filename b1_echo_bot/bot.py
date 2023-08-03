@@ -1,8 +1,9 @@
-import os
-import dotenv
-dotenv.load_dotenv()
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-ADMIN_ID = os.getenv('ADMIN_ID')
+from environs import Env
+
+env = Env()
+env.read_env()
+BOT_TOKEN = env('BOT_TOKEN')
+ADMIN_ID = env.int('ADMIN_ID')
 
 # import json
 
@@ -46,4 +47,5 @@ async def send_echo(message: Message):
 
 
 if __name__ == "__main__":
+    print(">>> РАБОТАЕМ <<<")
     dp.run_polling(bot)
