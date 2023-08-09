@@ -6,7 +6,7 @@ kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
 buttons: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}')
                                  for i in range(10)]
 
-kb_builder.row(*buttons, width=3)
+kb_builder.row(*buttons)
 
 button_1: KeyboardButton = KeyboardButton(text="Собак 🦮")
 button_2: KeyboardButton = KeyboardButton(text="Огурцов 🥒")
