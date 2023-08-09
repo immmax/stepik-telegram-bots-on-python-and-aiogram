@@ -16,14 +16,12 @@ async def process_question(message: Message):
 @router.message(F.text.lower() == 'собак 🦮')
 async def process_dog_answer(message: Message):
     await message.answer(text='Да, несомненно, кошки боятся собак. '
-                         'Но вы видели, как они боятся огурцов?',
-                         reply_markup=ReplyKeyboardRemove())
+                         'Но вы видели, как они боятся огурцов?')
 
 @router.message(F.text.lower() == 'огурцов 🥒')
 async def process_dog_answer(message: Message):
     await message.answer(text='Да, иногда кажется, что огурцов '
-                         'кошки боятся больше',
-                         reply_markup=ReplyKeyboardRemove())
+                         'кошки боятся больше')
 
 @router.message()
 async def send_echo(message: Message):
