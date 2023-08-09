@@ -1,5 +1,12 @@
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
+kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
+
+buttons: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}')
+                                 for i in range(10)]
+
+kb_builder.row(*buttons, width=3)
 
 button_1: KeyboardButton = KeyboardButton(text="Собак 🦮")
 button_2: KeyboardButton = KeyboardButton(text="Огурцов 🥒")
