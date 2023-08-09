@@ -1,0 +1,9 @@
+from aiogram.types import Message
+from lexicon.lexicon import LEXICON_RU
+
+@dp.message()
+async def process_start_command(message: Message):
+    try:
+        await message.send_copy(chat_id=message.chat.id)
+    except:
+        await message.reply(text=LEXICON_RU["no_echo"])
