@@ -28,5 +28,6 @@ LEXICON_COMMANDS_RU: dict[str, str] = {
       '/help': 'Справка по работе бота',
       '/support': 'Поддержка',
       '/contacts': 'Другие способы связи',
-      '/payments': 'Платежи'
+      '/payments': 'Платежи',
+      '/delete_menu': 'Убрать кнопку "Меню'
 }

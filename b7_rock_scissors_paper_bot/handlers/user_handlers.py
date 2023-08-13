@@ -1,4 +1,4 @@
-from aiogram import Router, F
+from aiogram import Router, F, Bot
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 from keyboards.keyboards import yes_no_kb, game_kb
@@ -18,6 +18,11 @@ async def process_start_command(message: Message):
 async def process_celp_command(message: Message):
     await message.answer(text=LEXICON_RU['/help'],
                          reply_markup=yes_no_kb)
+
+@router.message(Command(commands='delete_menu'))
+async def process_celp_command(message: Message, bot: Bot):
+    await bot.delete_my_commands()
+    await message.answer(text='Кнопка Меню удалена')
 
 @router.message(F.text == LEXICON_RU['yes_button'])
 async def process_yes_button(message: Message):
